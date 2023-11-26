@@ -1,11 +1,15 @@
 package logger
 
 import (
+	"os"
+
 	"github.com/sirupsen/logrus"
 )
 
 func ConfigureLogger() {
 	logrus.SetFormatter(&logrus.JSONFormatter{})
+	logrus.SetOutput(os.Stdout)
+	logrus.SetLevel(logrus.InfoLevel)
 }
 
 func LogError(message, point string) {
@@ -13,4 +17,8 @@ func LogError(message, point string) {
 		"point":   point,
 		"message": message,
 	})
+}
+
+func LogInfo(message string) {
+	logrus.Info(message)
 }

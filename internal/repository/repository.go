@@ -8,6 +8,6 @@ import (
 
 type Repository interface {
 	Close()
-	InsertMeow(context.Context, schema.Meow) error
-	GetMeowsList(context.Context) ([]schema.Meow, error)
+	InsertMeow(ctx context.Context, message schema.Meow) error
+	GetMeowsList(ctx context.Context, skip, take int64) ([]schema.Meow, error)
 }

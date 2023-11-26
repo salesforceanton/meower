@@ -1,0 +1,46 @@
+package repository
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/jmoiron/sqlx"
+	"github.com/salesforceanton/meower/internal/schema"
+)
+
+type PostgresRepo struct {
+	db *sqlx.DB
+}
+
+func NewPostgresRepo(db *sqlx.DB) *PostgresRepo {
+	return &PostgresRepo{db: db}
+}
+
+func (r *PostgresRepo) Close() {
+	r.db.Close()
+}
+
+func (r *PostgresRepo) InsertMeow(ctx context.Context, message schema.Meow) error {
+	query := fmt.Sprintf(`
+		INSERT INTO %s (body, created_at) VALUES (1$, 2$)
+	`, MEOWS_TABLE_NAME)
+
+	_, err := r.db.ExecContext(ctx, query)
+	return err
+}
+
+func (r *PostgresRepo) GetMeowsList(ctx context.Context, skip, take int64) ([]schema.Meow, error) {
+	var result []schema.Meow
+
+	query := fmt.Sprintf(`
+		SELECT id, body, created_at
+		FROM %s 
+		ORDER BY id DESC
+		OFFSET 1$ LIMIT 2$ 
+	`, MEOWS_TABLE_NAME)
+
+	if err := r.db.SelectContext(ctx, &result, query); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
