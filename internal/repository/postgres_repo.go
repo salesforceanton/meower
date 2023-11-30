@@ -22,10 +22,10 @@ func (r *PostgresRepo) Close() {
 
 func (r *PostgresRepo) InsertMeow(ctx context.Context, message schema.Meow) error {
 	query := fmt.Sprintf(`
-		INSERT INTO %s (body, created_at) VALUES (1$, 2$)
+		INSERT INTO %s (id, body, created_at) VALUES (1$, 2$, $3)
 	`, MEOWS_TABLE_NAME)
 
-	_, err := r.db.ExecContext(ctx, query)
+	_, err := r.db.ExecContext(ctx, query, message.Id, message.Body, message.CreatedAt)
 	return err
 }
 

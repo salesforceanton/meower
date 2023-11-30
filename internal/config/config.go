@@ -8,12 +8,13 @@ import (
 const ENV_PREFIX = "meower"
 
 type Config struct {
-	PostgresUsername string `envconfig:"POSTGRES_USERNAME"`
-	PostgresName     string `envconfig:"POSTGRES_NAME"`
-	PostgresPassword string `envconfig:"POSTGRES_PASSWORD"`
-	PostgresHost     string `envconfig:"MEOWER_POSTGRES_HOST"`
-	Port             string `envconfig:"PORT"`
-	NatsAddress      string `envconfig:"NATS_ADDRESS"`
+	PostgresUsername     string `envconfig:"POSTGRES_USERNAME"`
+	PostgresName         string `envconfig:"POSTGRES_NAME"`
+	PostgresPassword     string `envconfig:"POSTGRES_PASSWORD"`
+	PostgresHost         string `envconfig:"MEOWER_POSTGRES_HOST"`
+	Port                 string `envconfig:"PORT"`
+	NatsAddress          string `envconfig:"NATS_ADDRESS"`
+	ElasticsearchAddress string `envconfig:"ELASTICSEARCH_ADDRESS"`
 }
 
 // Recieve configuration values from env variables

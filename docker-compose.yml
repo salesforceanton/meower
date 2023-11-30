@@ -9,4 +9,9 @@ services:
       - POSTGRES_PASSWORD=${MEOWER_POSTGRES_PASSWORD}
       - POSTGRES_USER=${MEOWER_POSTGRES_USERNAME}
     ports:
-      - 5432:5432
+      - ${MEOWER_POSTGRES_PORT}:${MEOWER_POSTGRES_PORT}
+  nats:
+    image: "nats-streaming:latest"
+    restart: "always"
+  elasticsearch:
+    image: "docker.elastic.co/elasticsearch/elasticsearch:8.11.1"
