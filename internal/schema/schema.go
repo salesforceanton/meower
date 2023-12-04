@@ -3,7 +3,7 @@ package schema
 import "time"
 
 type Meow struct {
-	Id        string    `json:"Dd"         db:"id"`
-	Body      string    `json:"Body"       db:"body"`
-	CreatedAt time.Time `json:"CreatedAt" db:"created_at"`
+	Id        string    `json:"id"         db:"id"`
+	Body      string    `json:"body"       db:"body"`
+	CreatedAt time.Time `json:"createdAt"  db:"created_at"`
 }

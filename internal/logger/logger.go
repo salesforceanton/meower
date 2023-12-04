@@ -16,7 +16,7 @@ func LogError(message, point string) {
 	logrus.WithFields(logrus.Fields{
 		"point":   point,
 		"message": message,
-	})
+	}).Error()
 }
 
 func LogInfo(message string) {

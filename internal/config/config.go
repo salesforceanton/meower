@@ -11,9 +11,11 @@ type Config struct {
 	PostgresUsername     string `envconfig:"POSTGRES_USERNAME"`
 	PostgresName         string `envconfig:"POSTGRES_NAME"`
 	PostgresPassword     string `envconfig:"POSTGRES_PASSWORD"`
-	PostgresHost         string `envconfig:"MEOWER_POSTGRES_HOST"`
+	PostgresHost         string `envconfig:"POSTGRES_HOST"`
+	PostgresPort         string `envconfig:"POSTGRES_PORT"`
 	Port                 string `envconfig:"PORT"`
-	NatsAddress          string `envconfig:"NATS_ADDRESS"`
+	NatsPort             string `envconfig:"NATS_PORT"`
+	NatsHost             string `envconfig:"NATS_HOST"`
 	ElasticsearchAddress string `envconfig:"ELASTICSEARCH_ADDRESS"`
 }
 
