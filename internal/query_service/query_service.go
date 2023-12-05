@@ -57,7 +57,9 @@ func main() {
 			Body:      m.Body,
 			CreatedAt: m.CreatedAt,
 		}
-		searchRepo.InsertMeow(context.TODO(), message)
+		if err := searchRepo.InsertMeow(context.TODO(), message); err != nil {
+			logger.LogError(err.Error(), "[Event Bus Subscription]: error onmeow create event handler")
+		}
 	})
 	if err != nil {
 		logger.LogError(err.Error(), "[Runtime Error]: Error with Event Bus Subscribe")
