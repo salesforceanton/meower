@@ -1,4 +1,4 @@
-package search
+package search_repo
 
 import (
 	"bytes"
@@ -63,7 +63,7 @@ func (r *ElasticRepo) InsertMeow(ctx context.Context, message schema.Meow) error
 	}
 }
 
-func (r *ElasticRepo) searchMeows(ctx context.Context, queryString string, skip, take int64) ([]schema.Meow, error) {
+func (r *ElasticRepo) SearchMeows(ctx context.Context, queryString string, skip, take int64) ([]schema.Meow, error) {
 	successChan := make(chan []schema.Meow)
 	errorChan := make(chan error)
 

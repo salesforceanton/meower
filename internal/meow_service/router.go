@@ -7,12 +7,12 @@ import (
 )
 
 type Handler struct {
-	repo     *repository.PostgresRepo
-	eventBus *eventbus.NatsEventbus
+	repo     repository.Repository
+	eventBus eventbus.EventBus
 }
 
-func NewHandler(repo *repository.PostgresRepo,
-	eventBus *eventbus.NatsEventbus) *Handler {
+func NewHandler(repo repository.Repository,
+	eventBus eventbus.EventBus) *Handler {
 	return &Handler{
 		repo:     repo,
 		eventBus: eventBus,

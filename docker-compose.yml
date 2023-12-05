@@ -17,3 +17,5 @@ services:
       - ${MEOWER_NATS_PORT}:${MEOWER_NATS_PORT}
   elasticsearch:
     image: "docker.elastic.co/elasticsearch/elasticsearch:8.11.1"
+    ports:
+      - ${MEOWER_ELASTICSEARCH_PORT}:${MEOWER_ELASTICSEARCH_PORT}
