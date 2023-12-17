@@ -55,5 +55,4 @@ func (h *Handler) searchMeowsHandler(ctx *gin.Context) {
 	}
 
 	utils.NewSuccessResponce(ctx, result)
-
 }
