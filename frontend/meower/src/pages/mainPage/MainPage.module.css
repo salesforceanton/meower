@@ -1,0 +1,12 @@
+.app-header {
+    position: sticky;
+    top: 0;
+    height: 3rem;
+}
+
+.content-wrapper {
+    width: 100%;
+    height: calc(100vh - 3rem);
+    display: grid;
+    grid-template-columns: 35% 65%;
+}

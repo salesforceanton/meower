@@ -1,0 +1,11 @@
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: var(--brand-color-white);
+    background-color: var(--gradient-dark-30);
+}
+
+.header h2 {
+    margin-left: 1rem;
+}
