@@ -1,6 +1,43 @@
 version: '3.7'
 
 services:
+  nginx:
+    build: "./nginx"
+    ports:
+      - "8080:80"
+    depends_on:
+      - "meow"
+      - "query"
+      - "pusher"
+  meow:
+    build: "."
+    command: "meow-service"
+    depends_on:
+      - "postgres"
+      - "nats"
+    ports:
+      - ${MEOWER_PORT}:${MEOWER_PORT}
+    env_file:
+      - .env
+  query:
+    build: "."
+    command: "query-service"
+    depends_on:
+      - "postgres"
+      - "nats"
+    ports:
+      - ${MEOWER_PORT}:${MEOWER_PORT}
+    env_file:
+      - .env
+  pusher:
+    build: "."
+    command: "pusher-service"
+    depends_on:
+      - "nats"
+    ports:
+      - ${MEOWER_PORT}:${MEOWER_PORT}
+    env_file:
+      - .env
   postgres:
     build: "./postgres"
     restart: "always"
