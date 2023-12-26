@@ -1,4 +1,4 @@
-package meow_service
+package main
 
 import (
 	"context"
@@ -10,6 +10,7 @@ import (
 	"github.com/salesforceanton/meower/internal/config"
 	"github.com/salesforceanton/meower/internal/eventbus"
 	"github.com/salesforceanton/meower/internal/logger"
+	"github.com/salesforceanton/meower/internal/meow_service"
 	"github.com/salesforceanton/meower/internal/repository"
 )
 
@@ -42,10 +43,10 @@ func main() {
 
 	// Init Deps
 	repo := repository.NewPostgresRepo(db)
-	handler := NewHandler(repo, eventbus)
+	handler := meow_service.NewHandler(repo, eventbus)
 
 	// Run server
-	server := new(MeowServiceServer)
+	server := new(meow_service.MeowServiceServer)
 	go func() {
 		if err = server.Run(cfg.Port, handler.InitRoutes()); err != nil {
 			logger.LogError(err.Error(), "[Runtime Error]: Error with Meow Server Running or Server has been Stopped")

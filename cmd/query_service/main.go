@@ -1,4 +1,4 @@
-package query_service
+package main
 
 import (
 	"context"
@@ -10,6 +10,7 @@ import (
 	"github.com/salesforceanton/meower/internal/config"
 	"github.com/salesforceanton/meower/internal/eventbus"
 	"github.com/salesforceanton/meower/internal/logger"
+	"github.com/salesforceanton/meower/internal/query_service"
 	"github.com/salesforceanton/meower/internal/repository"
 	"github.com/salesforceanton/meower/internal/schema"
 	search_repo "github.com/salesforceanton/meower/internal/search"
@@ -69,10 +70,10 @@ func main() {
 
 	// Init Deps
 	repo := repository.NewPostgresRepo(db)
-	handler := NewHandler(repo, mq, searchRepo)
+	handler := query_service.NewHandler(repo, mq, searchRepo)
 
 	// Run server
-	server := new(QueryServiceServer)
+	server := new(query_service.QueryServiceServer)
 	go func() {
 		if err = server.Run(cfg.Port, handler.InitRoutes()); err != nil {
 			logger.LogError(err.Error(), "[Runtime Error]: Error with Query Server Running or Server has been Stopped")

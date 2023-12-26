@@ -1,4 +1,4 @@
-package pusher_service
+package main
 
 import (
 	"context"
@@ -10,6 +10,7 @@ import (
 	"github.com/salesforceanton/meower/internal/config"
 	"github.com/salesforceanton/meower/internal/eventbus"
 	"github.com/salesforceanton/meower/internal/logger"
+	"github.com/salesforceanton/meower/internal/pusher_service"
 	"github.com/salesforceanton/meower/internal/web_socket"
 )
 
@@ -46,8 +47,8 @@ func main() {
 	logger.LogInfo("Subscribe on meowcreated")
 
 	// Init Deps
-	handler := NewHandler(mq, hub)
-	server := new(PusherServiceServer)
+	handler := pusher_service.NewHandler(mq, hub)
+	server := new(pusher_service.PusherServiceServer)
 
 	// Run web socket Hub
 	go hub.Run()

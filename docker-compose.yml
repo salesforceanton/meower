@@ -10,7 +10,9 @@ services:
       - "query"
       - "pusher"
   meow:
-    build: "."
+    build: 
+      context: "."
+      dockerfile: "/meow_service/Dockerfile"
     command: "meow-service"
     depends_on:
       - "postgres"
@@ -20,7 +22,9 @@ services:
     env_file:
       - .env
   query:
-    build: "."
+    build: 
+      context: "."
+      dockerfile: "/query_service/Dockerfile"
     command: "query-service"
     depends_on:
       - "postgres"
@@ -30,7 +34,9 @@ services:
     env_file:
       - .env
   pusher:
-    build: "."
+    build:
+      context: "."
+      dockerfile: "/pusher_service/Dockerfile"
     command: "pusher-service"
     depends_on:
       - "nats"
