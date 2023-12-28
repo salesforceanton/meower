@@ -7,4 +7,4 @@ WORKDIR /github.com/salesforceanton/meower/meow_service
 RUN go mod download
 RUN go build -o ./bin/meow_service ./cmd/meow_service/main.go
 
-CMD ["./bin/meow_service"]
+ENTRYPOINT [ "bin/meow_service" ]

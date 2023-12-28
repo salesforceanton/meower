@@ -18,7 +18,7 @@ services:
       - "postgres"
       - "nats"
     ports:
-      - ${MEOWER_PORT}:${MEOWER_PORT}
+      - ${MEOWER_PORT}
     env_file:
       - .env
   query:
@@ -30,7 +30,7 @@ services:
       - "postgres"
       - "nats"
     ports:
-      - ${MEOWER_PORT}:${MEOWER_PORT}
+      - ${MEOWER_PORT}
     env_file:
       - .env
   pusher:
@@ -41,7 +41,7 @@ services:
     depends_on:
       - "nats"
     ports:
-      - ${MEOWER_PORT}:${MEOWER_PORT}
+      - ${MEOWER_PORT}
     env_file:
       - .env
   postgres:
