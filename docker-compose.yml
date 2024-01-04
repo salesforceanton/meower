@@ -2,21 +2,25 @@ version: '3.7'
 
 services:
   nginx:
-    build: "./nginx"
+    build: ./docker/nginx
     ports:
-      - "8080:80"
+      - 8080:80
     depends_on:
-      - "meow"
-      - "query"
-      - "pusher"
+      - meow
+      - query
+      - pusher
+    restart: always
   meow:
     build: 
       context: "."
-      dockerfile: "/meow_service/Dockerfile"
-    command: "meow-service"
+      dockerfile: "./docker/meow_service/Dockerfile"
+    command: meow-service
     depends_on:
-      - "postgres"
-      - "nats"
+      nats:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+    restart: always
     ports:
       - ${MEOWER_PORT}
     env_file:
@@ -24,11 +28,14 @@ services:
   query:
     build: 
       context: "."
-      dockerfile: "/query_service/Dockerfile"
-    command: "query-service"
+      dockerfile: "./docker/query_service/Dockerfile"
+    command: query-service
     depends_on:
-      - "postgres"
-      - "nats"
+      nats:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+    restart: always
     ports:
       - ${MEOWER_PORT}
     env_file:
@@ -36,29 +43,56 @@ services:
   pusher:
     build:
       context: "."
-      dockerfile: "/pusher_service/Dockerfile"
-    command: "pusher-service"
+      dockerfile: "./docker/pusher_service/Dockerfile"
+    command: pusher-service
     depends_on:
-      - "nats"
+      nats:
+        condition: service_started
+    restart: always
     ports:
       - ${MEOWER_PORT}
     env_file:
       - .env
   postgres:
-    build: "./postgres"
-    restart: "always"
+    build: ./docker/postgres
+    restart: always
     environment:
       - POSTGRES_DB=${MEOWER_POSTGRES_NAME}
       - POSTGRES_PASSWORD=${MEOWER_POSTGRES_PASSWORD}
       - POSTGRES_USER=${MEOWER_POSTGRES_USERNAME}
-    ports:
-      - ${MEOWER_POSTGRES_PORT}:${MEOWER_POSTGRES_PORT}
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ${MEOWER_POSTGRES_USERNAME} -d ${MEOWER_POSTGRES_NAME}'"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
   nats:
-    image: "nats-streaming:latest"
-    restart: "always"
+    image: nats-streaming:latest
+    restart: always
     ports:
-      - ${MEOWER_NATS_PORT}:${MEOWER_NATS_PORT}
+      - ${MEOWER_NATS_PORT}
   elasticsearch:
-    image: "docker.elastic.co/elasticsearch/elasticsearch:8.11.1"
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1
     ports:
-      - ${MEOWER_ELASTICSEARCH_PORT}:${MEOWER_ELASTICSEARCH_PORT}
+      - ${MEOWER_ELASTICSEARCH_PORT}
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 7000:8080
+    depends_on:
+      - postgres
+  frontend: 
+    build: ./frontend/meower
+    volumes:
+      - /app/node_modules
+      - ./frontend/meower:/app
+    ports: 
+      - ${MEOWER_FRONTEND_PORT}:${MEOWER_FRONTEND_PORT}
+    depends_on:
+      - nginx
+    restart: always
+    
+volumes:
+  postgres_data:
