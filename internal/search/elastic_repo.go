@@ -5,8 +5,8 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"
 	"strings"
+	"time"
 
 	"github.com/elastic/go-elasticsearch"
 	"github.com/salesforceanton/meower/internal/schema"
@@ -23,7 +23,7 @@ type ElasticRepo struct {
 
 func NewElasticRepo(addr string) (*ElasticRepo, error) {
 	cfg := elasticsearch.Config{
-		Addresses: []string{addr},
+		Addresses: []string{fmt.Sprintf("http://%s", addr)},
 	}
 	client, err := elasticsearch.NewClient(cfg)
 	if err != nil {
@@ -75,7 +75,7 @@ func (r *ElasticRepo) SearchMeows(ctx context.Context, queryString string, skip,
 	  			"size": %d,
 				"query": {
 					"multi_match": {
-					  	"query": %s,
+					  	"query": "%s",
 					  	"fields": [
 							"body",
 							"created_at"
@@ -91,17 +91,26 @@ func (r *ElasticRepo) SearchMeows(ctx context.Context, queryString string, skip,
 		)
 		if err != nil {
 			errorChan <- err
+			return
 		}
 
 		// Parse result
+		var jsonResponse map[string]interface{}
 		var searchResult []schema.Meow
-
 		defer res.Body.Close()
-		body, _ := io.ReadAll(res.Body)
-
-		if err = json.Unmarshal(body, &searchResult); err != nil {
+		if err = json.NewDecoder(res.Body).Decode(&jsonResponse); err != nil {
 			errorChan <- err
 		} else {
+			for _, hit := range jsonResponse["hits"].(map[string]interface{})["hits"].([]interface{}) {
+				source := hit.(map[string]interface{})["_source"].(map[string]interface{})
+				createdAt, _ := time.Parse(time.RFC3339, source["createdAt"].(string))
+
+				searchResult = append(searchResult, schema.Meow{
+					Id:        source["id"].(string),
+					Body:      source["body"].(string),
+					CreatedAt: createdAt,
+				})
+			}
 			successChan <- searchResult
 		}
 	}()

@@ -22,7 +22,7 @@ type SearchMeowsRequest struct {
 func (h *Handler) getMeowsListHandler(ctx *gin.Context) {
 	var request GetMeowsListRequest
 
-	if err := ctx.BindJSON(request); err != nil {
+	if err := ctx.BindJSON(&request); err != nil {
 		utils.NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
 		logger.LogError(err.Error(), "[Get Meows List Handler]: Parse request")
 		return
@@ -41,7 +41,7 @@ func (h *Handler) getMeowsListHandler(ctx *gin.Context) {
 func (h *Handler) searchMeowsHandler(ctx *gin.Context) {
 	var request SearchMeowsRequest
 
-	if err := ctx.BindJSON(request); err != nil {
+	if err := ctx.BindJSON(&request); err != nil {
 		utils.NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
 		logger.LogError(err.Error(), "[Search Meows Handler]: Parse request")
 		return

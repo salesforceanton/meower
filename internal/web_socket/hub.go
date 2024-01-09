@@ -48,7 +48,7 @@ func (h *Hub) Run() {
 			h.OnConnect(client)
 
 		case client := <-h.Unregister:
-			h.OnConnect(client)
+			h.OnDisconnect(client)
 		}
 	}
 }
