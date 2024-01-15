@@ -1,0 +1,11 @@
+.send-message__wrapper {
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    padding-top: 1rem;
+}
+
+.send-message__input {
+    background-color: var(--gradient-dark-20);
+    color: var(--gradient-neutral-70);
+}

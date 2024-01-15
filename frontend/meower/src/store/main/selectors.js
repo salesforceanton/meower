@@ -2,6 +2,7 @@ import { createSelector } from "@reduxjs/toolkit";
 
 const selectRootState = ({ main: output = {}}) => output;
 const selectSelectedChat = createSelector(selectRootState, (state) => state.selectedChat);
+const selectIsNoSelectedChat = createSelector(selectSelectedChat, (state) => !state);
 const selectChatListData = createSelector(selectRootState, (state) => state.chatList);
 const selectChatList = createSelector(
     selectChatListData,
@@ -17,6 +18,7 @@ const selectFeed = createSelector(selectRootState, (state) => state.feed)
 
 export const mainStateSelectors = {
     selectSelectedChat,
+    selectIsNoSelectedChat,
     selectChatList,
     selectSearchResultMessages,
     selectFeed

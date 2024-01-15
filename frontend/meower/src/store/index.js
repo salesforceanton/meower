@@ -6,6 +6,6 @@ import { commonSlice } from "./common/reducer";
 export default configureStore({
     reducer: {
         main: mainSlice.reducer,
-        root: commonSlice.reducer
+        common: commonSlice.reducer
     }
 });
