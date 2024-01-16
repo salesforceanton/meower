@@ -34,9 +34,21 @@ const sendMessageThunk = (message) => async(dispatch, getState) => {
     ));
 }
 
+const getChatListThunk = (payload) => (dispatch) => {
+    // TODO: Http request should be here
+    const mockChatsData = [
+        {
+            name: 'Anonymous',
+            id: 'anon1231'
+        }
+    ];
+    dispatch(mainStateGenericActions.setChatList(mockChatsData)); 
+}
+
 export const mainStateActions = {
     ...mainStateGenericActions,
     searchRequest: searchRequestThunk,
     selectChat: selectChatThunk,
-    sendMessage: sendMessageThunk
+    sendMessage: sendMessageThunk,
+    getChatList: getChatListThunk
 }

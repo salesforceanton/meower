@@ -1,20 +1,20 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-const selectRootState = ({ main: output = {}}) => output;
-const selectSelectedChat = createSelector(selectRootState, (state) => state.selectedChat);
+const selectMainState = ({ main: output = {}}) => output;
+const selectSelectedChat = createSelector(selectMainState, (state) => state.selectedChat);
 const selectIsNoSelectedChat = createSelector(selectSelectedChat, (state) => !state);
-const selectChatListData = createSelector(selectRootState, (state) => state.chatList);
+const selectChatListData = createSelector(selectMainState, (state) => state.chatList);
 const selectChatList = createSelector(
     selectChatListData,
     selectSelectedChat,
     (list, id) => list.map((e) => ({ ...e, isSelected: id === e.id }))
 );
-const selectSearchResults = createSelector(selectRootState, (state) => state.searchResults);
+const selectSearchResults = createSelector(selectMainState, (state) => state.searchResults);
 const selectSearchResultMessages = createSelector(
     selectSearchResults,
     (res) => res.messages
 );
-const selectFeed = createSelector(selectRootState, (state) => state.feed)
+const selectFeed = createSelector(selectMainState, (state) => state.feed)
 
 export const mainStateSelectors = {
     selectSelectedChat,

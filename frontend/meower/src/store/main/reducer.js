@@ -12,8 +12,8 @@ export const mainSlice = createSlice({
     name: 'main',
     initialState,
     reducers: {
-        initialize: (state, action) => {
-            state.chatList = action.payload.chatList;
+        setChatList: (state, action) => {
+            state.chatList = action.payload;
         },
         setSelectedChat: (state, action) => {
             state.selectedChat = action.payload.chatId;
