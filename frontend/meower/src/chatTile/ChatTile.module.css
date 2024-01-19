@@ -1,5 +1,5 @@
 .chat-tile__wrapper {
-    padding: 0.5rem 0.75rem 0.5rem 0.75rem;
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
     display: grid;
     box-sizing: border-box;
     width: 100%;
@@ -7,11 +7,17 @@
     grid-template-rows: 3.5rem;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: var(--gradient-blue-30);
+    color: var(--brand-color-white)
 }
 
 .tile-avatar {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 3rem;
+    height: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;

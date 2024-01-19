@@ -15,9 +15,15 @@ const searchRequestThunk = (query) => async(dispatch) => {
 }
 
 const selectChatThunk = (chatId) => async(dispatch) => {
-    const successCallback = (feed) => mainStateGenericActions.setSelectedChat({ feed, chatId });
+    const successCallback = (res) => dispatch(
+        mainStateGenericActions.setSelectedChat({ feed: res.body, chatId })
+    );
+    
     dispatch(makeHttpRequest(
-        { endpoint: SERVICE_ENDPOINTS.SEARCH, body: getFeedRequestDefault(chatId) },
+        { 
+            endpoint: SERVICE_ENDPOINTS.MESSAGES,
+            body: getFeedRequestDefault(chatId) 
+        },
         successCallback
     ));
 }
@@ -27,7 +33,7 @@ const sendMessageThunk = (message) => async(dispatch, getState) => {
 
     dispatch(makeHttpRequest(
         { 
-            endpoint: SERVICE_ENDPOINTS.SEARCH, 
+            endpoint: SERVICE_ENDPOINTS.MESSAGES, 
             method: HTTP_METHOD.POST,
             body: { body: message, chatId },
         }

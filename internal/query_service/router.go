@@ -27,8 +27,8 @@ func NewHandler(
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 
-	router.GET("/meows", h.getMeowsListHandler)
-	router.GET("/search", h.searchMeowsHandler)
+	router.GET("/meows", h.corsMiddleware, h.getMeowsListHandler)
+	router.GET("/search", h.corsMiddleware, h.searchMeowsHandler)
 
 	return router
 }

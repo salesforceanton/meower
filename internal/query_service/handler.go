@@ -9,20 +9,20 @@ import (
 )
 
 type GetMeowsListRequest struct {
-	Skip int64 `json:"skip"`
-	Take int64 `json:"take"`
+	Skip int64 `json:"skip" form:"skip"`
+	Take int64 `json:"take" form:"take"`
 }
 
 type SearchMeowsRequest struct {
-	Skip  int64  `json:"skip"`
-	Take  int64  `json:"take"`
-	Query string `json:"query"`
+	Skip  int64  `json:"skip" form:"skip"`
+	Take  int64  `json:"take" form:"take"`
+	Query string `json:"query" form:"query"`
 }
 
 func (h *Handler) getMeowsListHandler(ctx *gin.Context) {
 	var request GetMeowsListRequest
 
-	if err := ctx.BindJSON(&request); err != nil {
+	if err := ctx.Bind(&request); err != nil {
 		utils.NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
 		logger.LogError(err.Error(), "[Get Meows List Handler]: Parse request")
 		return
@@ -55,4 +55,11 @@ func (h *Handler) searchMeowsHandler(ctx *gin.Context) {
 	}
 
 	utils.NewSuccessResponce(ctx, result)
+}
+
+func (h *Handler) corsMiddleware(ctx *gin.Context) {
+	ctx.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+	ctx.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+	ctx.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+	ctx.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT")
 }

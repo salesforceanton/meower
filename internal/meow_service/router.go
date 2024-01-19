@@ -21,7 +21,7 @@ func NewHandler(repo repository.Repository,
 
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
-	router.POST("/meows", h.createMeowHandler)
+	router.POST("/meows", h.corsMiddleware, h.createMeowHandler)
 
 	return router
 }

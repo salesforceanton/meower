@@ -1,0 +1,26 @@
+.messages-list__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    height: calc(100% - 4rem);
+    overflow: hidden;
+}
+
+.messages-list__wrapper:hover {
+    overflow-y: auto;
+}
+
+.messages-list__wrapper::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+}
+.messages-list__wrapper::-webkit-scrollbar-track,
+.messages-list__wrapper::-webkit-scrollbar-corner {
+    background-color: var(--gradient-neutral-70);
+}
+.messages-list__wrapper::-webkit-scrollbar-thumb {
+    background-color: var(--gradient-neutral-40);
+    border-radius: 3px;
+    border: var(--border-neutral-thin-70);
+}
