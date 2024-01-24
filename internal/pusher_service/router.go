@@ -19,8 +19,15 @@ func NewHandler(eventbus eventbus.EventBus, hub *web_socket.Hub) *Handler {
 }
 
 func (h *Handler) InitRoutes() *gin.Engine {
-	router := gin.New()
-	router.POST("/pusher", h.hub.HandleWebSocket)
+	router := gin.Default()
+	router.GET("/pusher", h.corsMiddleware, h.hub.HandleWebSocket)
 
 	return router
+}
+
+func (h *Handler) corsMiddleware(ctx *gin.Context) {
+	ctx.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+	ctx.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+	ctx.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+	ctx.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT")
 }

@@ -36,7 +36,7 @@ func (r *PostgresRepo) GetMeowsList(ctx context.Context, skip, take int64) ([]sc
 	query := fmt.Sprintf(`
 		SELECT id, body, created_at
 		FROM %s 
-		ORDER BY id DESC
+		ORDER BY created_at ASC
 		OFFSET $1 LIMIT $2 
 	`, MEOWS_TABLE_NAME)
 

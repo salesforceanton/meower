@@ -17,7 +17,11 @@ export const mainSlice = createSlice({
         },
         setSelectedChat: (state, action) => {
             state.selectedChat = action.payload.chatId;
-            state.feed = action.payload.feed;
+            state.feed = action.payload.feed ?? [];
+        },
+        clearSelectedChat: (state) => {
+            state.selectedChat = null;
+            state.feed = [];
         },
         setSearchString: (state, action) => {
             state.searchString = action.payload;
@@ -28,6 +32,9 @@ export const mainSlice = createSlice({
         },
         setSearchResults: (state, action) => {
             state.searchResults = action.payload;
+        },
+        addNewMessage: (state, action) => {
+            state.feed.push(action.payload)
         }
     }
 });

@@ -1,19 +1,23 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
 
-import { useRef } from 'react';
+import { useState } from 'react';
 import styles from './SendMessageInput.module.css';
 import { KeyCodes } from '../utils/Utils';
 
 const SendMessageInput = (props) => {
-    const messageInputRef = useRef();
+    const [ message, setMessage ] = useState('');
 
     const handleKeyDown = (e) => {
         if (e.key === KeyCodes.ENTER) {
             sendMessage();
         }
     }
-    const sendMessage = () => props.onSend(messageInputRef.current.value);
+    const handleChange = (e) => setMessage(e.target.value);
+    const sendMessage = () => {
+        props.onSend(message)
+        setMessage('')
+    };
 
     return (
         <div className={styles['send-message-input__container']}>
@@ -22,7 +26,8 @@ const SendMessageInput = (props) => {
                 placeholder='Write a message...'
                 type="text"
                 onKeyDown={handleKeyDown}
-                ref={messageInputRef}
+                onChange={handleChange}
+                value={message}
             />
             <FontAwesomeIcon 
                 icon={faPaw} 
