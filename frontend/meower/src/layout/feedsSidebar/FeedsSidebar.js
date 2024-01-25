@@ -1,5 +1,6 @@
-import ChatList from '../../chatList/ChatList';
-import Search from '../../search/Search';
+import ChatList from '../../components/chatList/ChatList';
+import Search from '../../components/search/Search';
+
 import styles from './FeedsSidebar.module.css';
 
 const FeedsSidebar = () => {

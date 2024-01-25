@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
 import styles from './MessagesList.module.css';
-import { mainStateSelectors } from '../store/main/selectors';
+import { mainStateSelectors } from '../../store/main/selectors';
 import Message from '../message/Message';
 
 const MessagesList = () => {

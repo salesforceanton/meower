@@ -1,5 +1,5 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark } from '@fortawesome/free-solid-svg-icons' 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons' ;
 
 import styles from './SearchInput.module.css';
 
@@ -11,7 +11,7 @@ const SearchInput = (props) => {
                 placeholder='Search...'
                 type="text"
                 value={props.value}
-                onChange={props.onChange}
+                onKeyDown={props.onChange}
             />
             {props.value && <FontAwesomeIcon 
                 icon={faXmark} 

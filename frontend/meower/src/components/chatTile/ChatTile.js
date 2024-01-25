@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 
-import { mainStateActions } from '../store/main/actions';
+import { mainStateActions } from '../../store/main/actions';
 import styles from './ChatTile.module.css';
 
 const ChatTile = (props) => {

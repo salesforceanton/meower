@@ -10,6 +10,8 @@ const selectChatList = createSelector(
     (list, id) => list.map((e) => ({ ...e, isSelected: id === e.id }))
 );
 const selectSearchResults = createSelector(selectMainState, (state) => state.searchResults);
+const selectSearchString = createSelector(selectMainState, (state) => state.searchString);
+
 const selectSearchResultMessages = createSelector(
     selectSearchResults,
     (res) => res.messages
@@ -21,5 +23,6 @@ export const mainStateSelectors = {
     selectIsNoSelectedChat,
     selectChatList,
     selectSearchResultMessages,
+    selectSearchString,
     selectFeed
 }

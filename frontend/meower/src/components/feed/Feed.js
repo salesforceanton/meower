@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { mainStateSelectors } from '../store/main/selectors';
+import { mainStateSelectors } from '../../store/main/selectors';
 
 import styles from './Feed.module.css';
 import SendMessage from '../sendMessage/SendMessage';

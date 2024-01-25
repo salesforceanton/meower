@@ -6,7 +6,8 @@ import { mainStateActions } from '../../store/main/actions';
 import AppHeader from '../../layout/appHeader/AppHeader';
 import styles from './MainPage.module.css';
 import FeedsSidebar from '../../layout/feedsSidebar/FeedsSidebar';
-import Feed from '../../feed/Feed';
+import Feed from '../../components/feed/Feed';
+
 import { SERVICE_ENDPOINTS } from '../../store/service/constants';
 
 const MainPage = () => {

@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 
 import SendMessageInput from '../common/sendMessageInput/SendMessageInput';
 import styles from './SendMessage.module.css';
-import { mainStateActions } from '../store/main/actions';
+import { mainStateActions } from '../../store/main/actions';
 
 const SendMessage = (props) => {
     const dispatch = useDispatch();

@@ -6,10 +6,11 @@ import { mainStateSelectors } from "./selectors";
 
 const mainStateGenericActions = mainSlice.actions;
 
-const searchRequestThunk = (query) => async(dispatch) => {
-    dispatch(mainStateGenericActions.setSearchString(query));
+const searchRequestThunk = () => async(dispatch, getState) => {
+    const searhString = mainStateSelectors.selectSearchString(getState());
+    
     dispatch(makeHttpRequest(
-        { endpoint: SERVICE_ENDPOINTS.SEARCH, body: getSearchRequestDefault(query) },
+        { endpoint: SERVICE_ENDPOINTS.SEARCH, body: getSearchRequestDefault(searhString) },
         mainStateGenericActions.setSearchResults
     ));
 }
