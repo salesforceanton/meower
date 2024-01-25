@@ -1,0 +1,16 @@
+.results-list__wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.result-tile {
+    color: var(--brand-color-white);
+}
+
+.messages-header {
+    width: 100%;
+    padding: 0.25rem;
+    background-color: var(--gradient-dark-30);
+    color: var(--gradient-neutral-60);
+}

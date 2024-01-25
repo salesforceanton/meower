@@ -11,7 +11,7 @@ const SearchInput = (props) => {
                 placeholder='Search...'
                 type="text"
                 value={props.value}
-                onKeyDown={props.onChange}
+                onChange={props.onChange}
             />
             {props.value && <FontAwesomeIcon 
                 icon={faXmark} 

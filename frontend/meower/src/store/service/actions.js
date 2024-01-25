@@ -7,23 +7,6 @@ export const makeHttpRequest = ({ endpoint, method, headers = DEFAULT_HEADERS, b
     dispatch(commonStateActions.setError(null));
     dispatch(commonStateActions.setIsLoading(true));
 
-    // try {
-    //     const response = await fetch(endpoint, {
-    //         mode: 'no-cors',
-    //         method: method ?? HTTP_METHOD.GET,
-    //         headers: headers ?? DEFAULT_HEADERS,
-    //         body: body ? JSON.stringify(body) : null
-    //     });
-
-    //     const responseData = await response.json();
-    //     successCallback(responseData);
-    // } catch (error) {
-    //     dispatch(commonStateActions.setError(error));
-    //     errorCallback && errorCallback(error);
-    // } finally {
-    //     dispatch(commonStateActions.setIsLoading(false));
-    // }
-
     let callout;
 
     switch (method) {

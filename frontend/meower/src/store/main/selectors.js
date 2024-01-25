@@ -14,15 +14,19 @@ const selectSearchString = createSelector(selectMainState, (state) => state.sear
 
 const selectSearchResultMessages = createSelector(
     selectSearchResults,
-    (res) => res.messages
+    (res) => res.messages || []
 );
-const selectFeed = createSelector(selectMainState, (state) => state.feed)
+const selectShowSearchResults = createSelector(
+    selectSearchResultMessages, (messages) => !!messages.length
+);
+const selectFeed = createSelector(selectMainState, (state) => state.feed);
 
 export const mainStateSelectors = {
     selectSelectedChat,
     selectIsNoSelectedChat,
     selectChatList,
     selectSearchResultMessages,
+    selectShowSearchResults,
     selectSearchString,
     selectFeed
 }

@@ -31,7 +31,8 @@ export const mainSlice = createSlice({
             state.searchResults = {};
         },
         setSearchResults: (state, action) => {
-            state.searchResults = action.payload;
+            const { messages } = action.payload;
+            state.searchResults = { messages };
         },
         addNewMessage: (state, action) => {
             state.feed.push(action.payload)

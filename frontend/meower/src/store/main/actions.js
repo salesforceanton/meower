@@ -3,15 +3,19 @@ import { makeHttpRequest } from "../service/actions";
 import { getFeedRequestDefault, getSearchRequestDefault } from "./utils";
 import { HTTP_METHOD, SERVICE_ENDPOINTS } from "../service/constants";
 import { mainStateSelectors } from "./selectors";
+import { ANON_CHAT_ID, ANON_CHAT_NAME } from "./constants";
 
 const mainStateGenericActions = mainSlice.actions;
 
 const searchRequestThunk = () => async(dispatch, getState) => {
     const searhString = mainStateSelectors.selectSearchString(getState());
-    
+    if (!searhString) {
+        return;
+    }
     dispatch(makeHttpRequest(
-        { endpoint: SERVICE_ENDPOINTS.SEARCH, body: getSearchRequestDefault(searhString) },
-        mainStateGenericActions.setSearchResults
+            { endpoint: SERVICE_ENDPOINTS.SEARCH, body: getSearchRequestDefault(searhString) },
+            (res) => dispatch(mainStateGenericActions.setSearchResults(res)
+        )
     ));
 }
 
@@ -45,8 +49,8 @@ const getChatListThunk = (payload) => (dispatch) => {
     // TODO: Http request should be here
     const mockChatsData = [
         {
-            name: 'Anonymous',
-            id: 'anon1231'
+            name: ANON_CHAT_NAME,
+            id: ANON_CHAT_ID
         }
     ];
     dispatch(mainStateGenericActions.setChatList(mockChatsData)); 

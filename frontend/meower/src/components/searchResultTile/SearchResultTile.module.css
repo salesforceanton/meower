@@ -1,4 +1,4 @@
-.chat-tile__wrapper {
+.result-tile__wrapper {
     padding: 0.25rem 0.5rem 0.25rem 0.5rem;
     display: grid;
     box-sizing: border-box;
@@ -35,12 +35,12 @@
     margin: 0 0 0.25rem 0 !important
 }
 
-.chat-name {
+.sender-name {
     font-weight: 600;
     margin-bottom: 0.75rem;
 }
 
-.last-message {
+.message {
     font-size: 0.85rem;
     color: var(--gradient-neutral-60);
 }
