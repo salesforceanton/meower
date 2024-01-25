@@ -1,7 +1,8 @@
 # meower
-Chat app building with GO microservices and React frontend part
+# Chat app building with GO microservices and React frontend part
 
-## Stack
+### Stack:
+```
   Go
   ElasticSearch
   Postgres
@@ -12,9 +13,9 @@ Chat app building with GO microservices and React frontend part
 Using:
   HTTP rest
   Websocket
+```
 
-###
-Currently working only on dev enviroment
+### Currently working only on dev enviroment
 
 ![meower-diagram](https://github.com/salesforceanton/meower/assets/125591261/1b36ad37-2ac8-4e30-be10-9a8e0764bd8d)
 
