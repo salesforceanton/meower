@@ -8,6 +8,7 @@
   Postgres
   Nats
   React js
+  Nginx
   Docker
 
 Using:
