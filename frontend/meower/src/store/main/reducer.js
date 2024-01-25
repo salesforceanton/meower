@@ -18,6 +18,8 @@ export const mainSlice = createSlice({
         setSelectedChat: (state, action) => {
             state.selectedChat = action.payload.chatId;
             state.feed = action.payload.feed ?? [];
+            state.searchString = '';
+            state.searchResults = [];
         },
         clearSelectedChat: (state) => {
             state.selectedChat = null;
@@ -31,8 +33,9 @@ export const mainSlice = createSlice({
             state.searchResults = {};
         },
         setSearchResults: (state, action) => {
-            const { messages } = action.payload;
-            state.searchResults = { messages };
+            state.searchResults = { messages: action.payload.body };
+            state.selectedChat = null;
+            state.feed = [];
         },
         addNewMessage: (state, action) => {
             state.feed.push(action.payload)

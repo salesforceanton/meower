@@ -3,7 +3,7 @@ import { faPaw } from '@fortawesome/free-solid-svg-icons';
 
 import { useDispatch } from 'react-redux';
 
-import styles from './SearchResults.module.css';
+import styles from './SearchResultTile.module.css';
 import { mainStateActions } from '../../store/main/actions';
 import { ANON_CHAT_ID, ANON_CHAT_SENDER_NAME } from '../../store/main/constants';
 
@@ -26,7 +26,9 @@ const SearchResultTile = (props) => {
                 <p className={styles['sender-name']}>{sender || ANON_CHAT_SENDER_NAME}</p>
                 <p className={styles['message']}>{body}</p>
             </div>
-            <p className={styles['last-message-date']}>{formattedTime}</p>
+            <div className={styles['message-time__container']}>
+                <p className={styles['message-time']}>{formattedTime}</p>
+            </div>
         </div>
     )
 }

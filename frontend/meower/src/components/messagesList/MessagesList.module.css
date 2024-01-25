@@ -4,11 +4,7 @@
     justify-content: flex-end;
     width: 100%;
     height: calc(100% - 4rem);
-    overflow: hidden;
-}
-
-.messages-list__wrapper:hover {
-    overflow-y: auto;
+    overflow: auto;
 }
 
 .messages-list__wrapper::-webkit-scrollbar {

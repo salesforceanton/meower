@@ -3,16 +3,11 @@
     display: grid;
     box-sizing: border-box;
     width: 100%;
-    grid-template-columns: 3.5rem 1fr 3rem;
+    grid-template-columns: 3.5rem 1fr auto;
     grid-template-rows: 3.5rem;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-}
-
-.selected {
-    background-color: var(--gradient-blue-30);
-    color: var(--brand-color-white)
 }
 
 .tile-avatar {
@@ -26,9 +21,10 @@
     background-color: var(--gradient-blue-60);
 }
 
-.tile-avatar p {
-    margin: 0 !important;
-    font-size: 2rem;
+.tile-avatar > * {
+    margin: 0 0 0.25rem 0 !important;
+    width: 1.75rem;
+    height: 1.75rem;
 }
 
 .tile-main-content p {
@@ -40,7 +36,7 @@
     margin-bottom: 0.75rem;
 }
 
-.message {
+.message, .message-time {
     font-size: 0.85rem;
     color: var(--gradient-neutral-60);
 }
@@ -49,4 +45,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.message-time__container {
+    display: flex;
+    align-items: flex-end;
 }

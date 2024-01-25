@@ -9,7 +9,7 @@ const SearchResults = (props) => {
     return (
         <div className={`${styles['results-list__wrapper']} ${props.className}`}>
             <div className={styles['messages-header']}>
-                <p>Found {messages.lenght} messages</p>
+                <p>{`Found ${messages.length} messages`}</p>
             </div>
             {messages.map((e) => 
                 <SearchResultTile 

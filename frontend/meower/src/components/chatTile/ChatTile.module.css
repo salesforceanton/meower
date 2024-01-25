@@ -27,7 +27,7 @@
 }
 
 .tile-avatar p {
-    margin: 0 !important;
+    margin: 0 0 0.25rem 0 !important;
     font-size: 2rem;
 }
 

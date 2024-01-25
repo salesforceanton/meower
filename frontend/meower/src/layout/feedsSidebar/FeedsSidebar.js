@@ -9,12 +9,12 @@ import styles from './FeedsSidebar.module.css';
 import { mainStateSelectors } from '../../store/main/selectors';
 
 const FeedsSidebar = () => {
-    const showSearchResults = useSelector(mainStateSelectors.selectShowSearchResults);
+    const searchString = useSelector(mainStateSelectors.selectSearchString);
 
     return (
         <div className={styles['feeds-sidebar__wrapper']}>
             <Search/>
-            {showSearchResults 
+            {searchString 
                 ? <SearchResults/>
                 : <ChatList/>
             }
